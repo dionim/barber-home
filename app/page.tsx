@@ -1,95 +1,71 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { Box, Container, IconButton, Separator } from '@chakra-ui/react';
+import { colors } from './config/colors';
+import { LucideArrowUp } from 'lucide-react';
+import { HeaderNav } from './ui/header-nav';
+import { HeroSection } from './ui/hero-section';
+import { StepsSection } from './ui/steps-section';
+import { FaqSection } from './ui/faq-section';
+import { DownloadBanner } from './ui/download-banner';
+import { QuoteCarousel } from './ui/quote-carousel';
+import { useEffect, useState } from 'react';
+
+type stepProps = {
+  id: number;
+  title: string;
+  description: string;
+};
+
+type DataProps = {
+  heroSection: {
+    title: string;
+  };
+  stepsSection: {
+    firstStep: stepProps;
+    secondStep: stepProps;
+    thirdStep: stepProps;
+  };
+};
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Container
+      maxWidth="1455px"
+      height="auto"
+      margin="0 auto"
+      padding="0"
+      paddingBottom="2rem"
+    >
+      <Box id="top-element" />
+      <HeaderNav />
+      <HeroSection />
+      <Separator display={{ base: 'block', md: 'none' }} marginY="2rem" />
+      <StepsSection />
+      <Separator display={{ base: 'block', md: 'none' }} marginBottom="2rem" />
+      <QuoteCarousel />
+      <Box id="faq-section">
+        <FaqSection />
+      </Box>
+      <DownloadBanner />
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      <IconButton
+        display={{ base: 'none', md: 'flex' }}
+        backgroundColor={colors.yellow}
+        position="fixed"
+        bottom="2rem"
+        shadow="xl"
+        size="xl"
+        right={{ md: '1rem', lg: '6rem' }}
+        onClick={() => {
+          const element = document.getElementById('top-element');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+      >
+        <LucideArrowUp size={48} color={colors.black} />
+      </IconButton>
+    </Container>
   );
 }

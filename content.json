@@ -1,0 +1,111 @@
+{
+  "header": {
+    "nav": [
+      {
+        "id": "01",
+        "slug": "hero-section",
+        "title": "Home"
+      },
+      {
+        "id": "02",
+        "slug": "steps-section",
+        "title": "Como baixar"
+      },
+      {
+        "id": "03",
+        "slug": "quote-section",
+        "title": "Quem usa"
+      },
+      {
+        "id": "04",
+        "slug": "faq-section",
+        "title": "Dúvidas"
+      }
+    ],
+    "action": {
+      "label": "Fale conosco",
+      "url": "https://wa.me/5511999999999?text=Ol%C3%A1%20vim%20atrav%C3%A9s%20do%20site%20Barber%20Home%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es"
+    }
+  },
+  "body": {
+    "hero": {
+      "title": "Barber Home, o seu barbeiro delivery. Na sua casa ou na barbearia."
+    },
+    "stepsSection": {
+      "title": "Como baixar",
+      "description": "É bem simples, basta seguir as instruções abaixo.",
+      "steps": [
+        {
+          "id": "01",
+          "title": "Baixe o aplicativo",
+          "description": "É gratuíto e sempre será. Baixe pela Apple Store ou Google Play."
+        },
+        {
+          "id": "02",
+          "title": "Instale o aplicativo",
+          "description": "Após instalar o aplicativo, basta seguir as instruções de uso para controlar as despesas"
+        },
+        {
+          "id": "03",
+          "title": "Pronto!",
+          "description": "Com o App rodando é só começar a usar e adicionando a suas depesas fixas e variáveis."
+        }
+      ]
+    },
+    "quoteCarousel": {
+      "title": "Quem usa",
+      "description": "O que o nossos usuários dizem sobre o nosso app?",
+      "quotes": [
+        {
+          "quote": "Sou suspeito em falar desse aplicativo, ele foi construído de usuário para usuário. A facilidade de chamar um barbeiro no meu conforto e sem igual.",
+          "author": "Dione Moreira"
+        },
+        {
+          "quote": "A experiência foi fantástica! Nunca mais vou querer marcar barbeiro de outro jeito. Muito prático e rápido.",
+          "author": "Carlos Ferreira"
+        }
+      ]
+    },
+    "faqSection": {
+      "title": "As perguntinhas mais frequentes",
+      "description": "Ficou com alguma duvida?",
+      "emailButton": "mailto:contato@barberhome.com",
+      "instagramButton": "https://www.instagram.com/barberhomeapp/",
+      "linkedinButton": "https://linkedin.com/in/barber-home",
+      "faqs": [
+        {
+          "id": "1",
+          "question": "O aplicativo é pago?",
+          "answer": "100% gratuito e sempre será. Criado unicamente para você agendar com o seu barbeiro mais próximo de você."
+        },
+        {
+          "id": "2",
+          "question": "Por que devo usar o app Barber Home?",
+          "answer": "Após instalar o aplicativo, basta seguir as instruções de uso para controlar as despesas"
+        },
+        {
+          "id": "3",
+          "question": "Posso adicionar conteúdos ao aplicativo",
+          "answer": "100% gratuito e sempre será. Criado unicamente para você agendar com o seu barbeiro mais próximo de você."
+        },
+        {
+          "id": "4",
+          "question": "Existe uma versão web do aplicativo?",
+          "answer": "100% gratuito e sempre será. Criado unicamente para você agendar com o seu barbeiro mais próximo de você."
+        },
+        {
+          "id": "5",
+          "question": "Quero contribuir em melhorar o app, como faço?",
+          "answer": "100% gratuito e sempre será. Criado unicamente para você agendar com o seu barbeiro mais próximo de você."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "title": "Aproveite o que é de melhor no app.\nBaixe agora!"
+  },
+  "socialButtons": {
+    "appleButton": "https://apps.apple.com/br/app/barber-home/id6446256666",
+    "googleButton": "https://play.google.com/store/apps/details?id=com.barber.home"
+  }
+}

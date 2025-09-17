@@ -1,0 +1,214 @@
+'use client';
+import { Fragment, useRef, useState, useEffect } from 'react';
+import {
+  Grid,
+  Flex,
+  Stack,
+  Button,
+  Separator,
+  Box,
+  IconButton,
+  Drawer,
+  Portal,
+  Accordion,
+  Text,
+  AbsoluteCenter,
+  CloseButton,
+  Bleed,
+} from '@chakra-ui/react';
+import NextImage from 'next/image';
+import logo from '@/app/assets/Barber Home.svg';
+import { colors } from '../config/colors';
+import { LucideAlignJustify, LucideX } from 'lucide-react';
+import { Show } from '@chakra-ui/react';
+import content from '../../content.json';
+// const menu = [
+//   { id: '01', title: 'Home', href: '/', sectionId: 'hero-section' },
+//   {
+//     id: '02',
+//     title: 'Como baixar',
+//     href: '/como-baixar',
+//     sectionId: 'steps-section',
+//   },
+//   {
+//     id: '03',
+//     title: 'Quem usa',
+//     href: '/quem-usa',
+//     sectionId: 'quote-section',
+//   },
+//   {
+//     id: '04',
+//     title: 'Dúvidas',
+//     href: '/duvidas',
+//     sectionId: 'faq-section',
+//   },
+// ];
+
+const useVisibleSection = (sectionIds: string[]) => {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(id);
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.5, // 50% da seção precisa estar visível
+        },
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, [sectionIds]);
+
+  return activeSection;
+};
+
+export const HeaderNav = () => {
+  const sectionIds = [
+    'hero-section',
+    'steps-section',
+    'quote-section',
+    'faq-section',
+  ];
+  const activeSection = useVisibleSection(sectionIds);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <>
+      <Grid
+        display={{ base: 'none', md: 'grid' }}
+        templateColumns="auto 1fr auto"
+        padding="1.75rem"
+        alignItems="center"
+        position="sticky"
+        top="0"
+        zIndex="10"
+        backgroundColor={colors.black}
+      >
+        <NextImage src={logo} height={75} alt="Logo" />
+        <Flex justifyContent="center" alignItems="center">
+          {content.header.nav.map((item: any, index: number) => (
+            <Fragment key={item.id}>
+              <Stack gap="0">
+                <Button
+                  variant="plain"
+                  color="white"
+                  fontSize={{ base: '0.75rem', md: '0.75rem', lg: '1.5rem' }}
+                  fontWeight="bold"
+                  onClick={() => {
+                    const element = document.getElementById(item.slug);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  {item.title}
+                </Button>
+                <Box
+                  borderBottom={`3px solid ${activeSection === item.slug ? colors.yellow : 'transparent'}`}
+                  margin="0 1rem"
+                />
+              </Stack>
+              {index < content.header.nav.length - 1 && (
+                <Separator orientation="vertical" height="6" />
+              )}
+            </Fragment>
+          ))}
+        </Flex>
+
+        <Button
+          variant="solid"
+          color="white"
+          size={{ base: 'md', md: 'sm', lg: 'xl' }}
+          fontWeight="bold"
+          padding="1rem 1.5rem"
+          borderRadius="l3"
+          backgroundColor={colors.yellow}
+          onClick={() => window.open(content.header.action.url, '_blank')}
+        >
+          {content.header.action.label}
+        </Button>
+      </Grid>
+      <Bleed display={{ base: 'block', md: 'none' }} height="4.75rem" />
+      <Drawer.Root
+        placement="top"
+        open={menuOpen}
+        onOpenChange={() => setMenuOpen(!menuOpen)}
+      >
+        <Drawer.Trigger asChild>
+          <Flex
+            position="fixed"
+            justifyContent="space-between"
+            alignItems="center"
+            padding="1rem"
+            top="0"
+            zIndex="10"
+            width="100%"
+            display={{ base: 'flex', md: 'none' }}
+            backgroundColor={colors.black}
+          >
+            <Box>
+              <Show
+                fallback={<LucideAlignJustify color={colors.yellow} />}
+                when={menuOpen}
+              >
+                <LucideX color="white" />
+              </Show>
+            </Box>
+            <NextImage src={logo} height={50} width={50} alt="Logo" />
+          </Flex>
+        </Drawer.Trigger>
+        <Portal>
+          <Drawer.Positioner top="4rem" border="none" zIndex="9">
+            <Drawer.Content
+              border="none"
+              backgroundColor={colors.black}
+              shadow="none"
+            >
+              <Drawer.Body padding="1rem">
+                <Stack alignItems="center" justifyContent="center">
+                  {content.header.nav.map((item: any) => (
+                    <Button
+                      key={item.id}
+                      variant="plain"
+                      color="white"
+                      fontSize="1.25rem"
+                      fontWeight={700}
+                      onClick={() => {
+                        const element = document.getElementById(item.slug);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        setMenuOpen(false);
+                      }}
+                    >
+                      {item.title}
+                    </Button>
+                  ))}
+                </Stack>
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
+    </>
+  );
+};

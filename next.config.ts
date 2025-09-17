@@ -1,7 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    allowMiddlewareResponseBody: true,
+  },
+  // Enable emotion for Chakra UI
+  compiler: {
+    emotion: true,
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
